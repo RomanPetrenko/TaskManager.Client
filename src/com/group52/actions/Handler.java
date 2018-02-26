@@ -3,21 +3,19 @@ import com.group52.view.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.text.*;
 import java.util.*;
 
 import org.apache.log4j.*;
 
-public class ActionsController implements ActionListener {
+public class Handler implements ActionListener {
 
-    private Logger log = Logger.getLogger(ActionsController.class);
+    private Logger log = Logger.getLogger(Handler.class);
     private MainPanel mainPanel;
-    private Controller controller;
+    private ServerDialog serverDialog;
 
-    public ActionsController(MainPanel mainPanel, Controller controller) {
+    public Handler(MainPanel mainPanel, ServerDialog serverDialog) {
         this.mainPanel = mainPanel;
-        this.controller = controller;
+        this.serverDialog = serverDialog;
     }
 
     private void editTasksToComboBox () { }
@@ -25,8 +23,12 @@ public class ActionsController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             if (e.getSource().equals(mainPanel.createTaskFormButton)) {
-                CreateTaskForm createTaskForm = new CreateTaskForm();
-                controller.createTask(createTaskForm.getTitle());
+                CreateTaskForm taskForm = new CreateTaskForm();
+                serverDialog.sendXMLRequest("create");
+                if (serverDialog.getResponseFromServer().equals("OK")){
+                    serverDialog.sendXMLToServer(XMLParse.parseTaskToXML(taskForm.getTitle()));
+                }
+
             }
 
             if (e.getSource().equals(mainPanel.exitButton)) {
@@ -40,10 +42,6 @@ public class ActionsController implements ActionListener {
             mainPanel.displayErrorMessage(iae.getMessage());
             log.error("IllegalArgumentException: ", iae);
         }
-        catch (IOException io) {
-            mainPanel.displayErrorMessage(io.getMessage());
-            log.error("IOException: ", io);
-        }
         catch (NullPointerException npe) {
             mainPanel.displayErrorMessage(npe.getMessage());
             log.error("NullPointerException: ", npe);
@@ -55,10 +53,6 @@ public class ActionsController implements ActionListener {
         catch (NoSuchElementException nse) {
             mainPanel.displayErrorMessage(nse.getMessage());
             log.error("NoSuchElementException: ", nse);
-        }
-        catch (ParseException pe) {
-            mainPanel.displayErrorMessage(pe.getMessage());
-            log.error("Incorrect format: ", pe);
         }
         catch (Exception ex){
             mainPanel.displayErrorMessage(ex.getMessage());

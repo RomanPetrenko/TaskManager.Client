@@ -3,271 +3,205 @@
   <ID>JAVA</ID>
   <OriginalElement>com.group52.actions.Handler</OriginalElement>
   <nodes>
-    <node x="391.16973958333347" y="445.0">com.group52.view.NotificationForm</node>
-    <node x="722.625" y="80.0">java.awt.event.ActionListener</node>
-    <node x="835.294791666667" y="706.0">com.group52.view.CreateTaskForm</node>
-    <node x="1536.1697916666672" y="662.0">com.group52.view.EditTaskForm</node>
-    <node x="1320.4822395833335" y="434.0">com.group52.view.Calendar</node>
-    <node x="1611.4822395833335" y="445.0">com.group52.view.DeleteTaskForm</node>
-    <node x="665.919791666667" y="982.0">com.group52.actions.Handler</node>
-    <node x="1827.1697916666672" y="739.0">com.group52.actions.ServerDialog</node>
-    <node x="709.419791666667" y="1116.0">com.group52.actions.Main</node>
-    <node x="0.0" y="706.0">com.group52.view.MainPanel</node>
-    <node x="464.41973958333347" y="212.0">com.group52.view.Listenable</node>
-    <node x="558.294791666667" y="739.0">com.group52.actions.XMLParse</node>
-    <node x="791.625" y="0.0">java.util.EventListener</node>
-    <node x="1017.4822395833335" y="434.0">com.group52.view.AuthorizationForm</node>
-    <node x="726.4822395833335" y="434.0">com.group52.view.NewUserForm</node>
-    <node x="1386.5075520833334" y="212.0">com.group52.view.Closeable</node>
+    <node x="2904.5" y="72.0">com.group52.view.NotificationForm</node>
+    <node x="4071.0" y="1694.0">java.awt.event.ActionListener</node>
+    <node x="1864.5" y="1159.0">com.group52.view.CreateTaskForm</node>
+    <node x="2904.5" y="1054.0">com.group52.view.Listenable</node>
+    <node x="2584.5" y="1355.0">com.group52.view.EditTaskForm</node>
+    <node x="2224.5" y="1181.0">com.group52.view.Calendar</node>
+    <node x="591.5" y="832.0">com.group52.actions.XMLParse</node>
+    <node x="4420.0" y="1705.0">java.util.EventListener</node>
+    <node x="3304.5" y="181.0">com.group52.view.AuthorizationForm</node>
+    <node x="3664.5" y="312.0">com.group52.view.DeleteTaskForm</node>
+    <node x="1511.0" y="1003.0">com.group52.actions.Handler</node>
+    <node x="-15.5" y="301.0">com.group52.view.NewUserForm</node>
+    <node x="1934.0" y="334.0">com.group52.view.Closeable</node>
+    <node x="1200.0" y="712.0">com.group52.actions.ServerDialog</node>
+    <node x="954.5" y="734.0">com.group52.actions.Main</node>
+    <node x="344.5" y="479.0">com.group52.view.MainPanel</node>
   </nodes>
   <notes />
   <edges>
     <edge source="com.group52.actions.Handler" target="com.group52.view.CreateTaskForm">
-      <point x="48.375" y="-37.0" />
-      <point x="843.294791666667" y="942.0" />
-      <point x="1038.5447916666672" y="942.0" />
-      <point x="67.75" y="81.0" />
+      <point x="129.0" y="0.0" />
+      <point x="1960.0" y="1040.0" />
+      <point x="-40.0" y="-81.0" />
     </edge>
     <edge source="com.group52.view.NewUserForm" target="com.group52.view.Listenable">
-      <point x="-90.33333333333326" y="-59.0" />
-      <point x="771.6489062500002" y="334.0" />
-      <point x="616.8572395833335" y="334.0" />
-      <point x="16.9375" y="26.0" />
+      <point x="0.0" y="-59.0" />
+      <point x="120.0" y="0.0" />
+      <point x="3240.0" y="0.0" />
+      <point x="3240.0" y="1060.0" />
+      <point x="135.5" y="-20.0" />
     </edge>
     <edge source="com.group52.view.AuthorizationForm" target="com.group52.view.Listenable">
-      <point x="-90.33333333333326" y="-59.0" />
-      <point x="1062.6489062500002" y="324.0" />
-      <point x="650.7322395833335" y="324.0" />
-      <point x="50.8125" y="26.0" />
+      <point x="0.0" y="59.0" />
+      <point x="3440.0" y="1070.0" />
+      <point x="135.5" y="-10.0" />
     </edge>
     <edge source="com.group52.view.DeleteTaskForm" target="com.group52.view.Closeable">
-      <point x="0.0" y="-48.0" />
-      <point x="1746.9822395833335" y="294.0" />
-      <point x="1493.7575520833334" y="294.0" />
-      <point x="41.25" y="26.0" />
+      <point x="-135.5" y="0.0" />
+      <point x="66.0" y="0.0" />
     </edge>
     <edge source="com.group52.actions.Main" target="com.group52.view.MainPanel">
-      <point x="-71.25" y="-26.0" />
-      <point x="723.669791666667" y="1096.0" />
-      <point x="90.625" y="1096.0" />
-      <point x="90.625" y="962.0" />
-      <point x="33.875" y="962.0" />
-      <point x="-101.625" y="81.0" />
+      <point x="-40.0" y="-26.0" />
+      <point x="1000.0" y="600.0" />
+      <point x="135.5" y="40.0" />
     </edge>
     <edge source="com.group52.view.MainPanel" target="com.group52.view.Closeable">
-      <point x="90.33333333333326" y="-81.0" />
-      <point x="225.83333333333326" y="622.0" />
-      <point x="1298.9822395833335" y="622.0" />
-      <point x="1298.9822395833335" y="394.0" />
-      <point x="1444.2575520833334" y="394.0" />
-      <point x="-8.25" y="26.0" />
+      <point x="0.0" y="-81.0" />
+      <point x="480.0" y="380.0" />
+      <point x="-66.0" y="20.0" />
     </edge>
     <edge source="com.group52.view.NotificationForm" target="java.awt.event.ActionListener">
-      <point x="-90.33333333333326" y="-48.0" />
-      <point x="436.3364062500002" y="404.0" />
-      <point x="417.23229166666715" y="404.0" />
-      <point x="417.23229166666715" y="182.0" />
-      <point x="812.925" y="182.0" />
-      <point x="-38.700000000000045" y="26.0" />
+      <point x="135.5" y="0.0" />
+      <point x="4200.0" y="120.0" />
+      <point x="0.0" y="-26.0" />
     </edge>
     <edge source="com.group52.actions.Handler" target="java.awt.event.ActionListener">
-      <point x="-48.375" y="-37.0" />
-      <point x="746.544791666667" y="942.0" />
-      <point x="281.5" y="942.0" />
-      <point x="281.5" y="162.0" />
-      <point x="761.325" y="162.0" />
-      <point x="-90.29999999999995" y="26.0" />
+      <point x="0.0" y="37.0" />
+      <point x="1640.0" y="1715.0" />
+      <point x="-129.0" y="-5.0" />
     </edge>
     <edge source="com.group52.view.CreateTaskForm" target="com.group52.view.Closeable">
-      <point x="33.875" y="-81.0" />
-      <point x="1004.669791666667" y="632.0" />
-      <point x="1309.9822395833335" y="632.0" />
-      <point x="1309.9822395833335" y="404.0" />
-      <point x="1460.7575520833334" y="404.0" />
-      <point x="8.25" y="26.0" />
+      <point x="0.0" y="-81.0" />
+      <point x="0.0" y="26.0" />
     </edge>
     <edge source="com.group52.view.NotificationForm" target="com.group52.view.Closeable">
-      <point x="90.33333333333331" y="-48.0" />
-      <point x="617.0030729166667" y="364.0" />
-      <point x="1394.7575520833334" y="364.0" />
-      <point x="-57.75" y="26.0" />
+      <point x="-135.5" y="0.0" />
+      <point x="2000.0" y="120.0" />
+      <point x="0.0" y="-26.0" />
     </edge>
     <edge source="com.group52.view.CreateTaskForm" target="java.awt.event.ActionListener">
-      <point x="-101.625" y="-81.0" />
-      <point x="869.169791666667" y="602.0" />
-      <point x="355.95098958333347" y="602.0" />
-      <point x="355.95098958333347" y="172.0" />
-      <point x="787.125" y="172.0" />
-      <point x="-64.5" y="26.0" />
+      <point x="0.0" y="81.0" />
+      <point x="2000.0" y="1710.0" />
+      <point x="-129.0" y="-10.0" />
     </edge>
     <edge source="com.group52.view.Calendar" target="com.group52.view.Listenable">
-      <point x="-90.33333333333326" y="-59.0" />
-      <point x="1365.6489062500002" y="314.0" />
-      <point x="684.6072395833335" y="314.0" />
-      <point x="84.6875" y="26.0" />
+      <point x="135.5" y="0.0" />
+      <point x="3000.0" y="1240.0" />
+      <point x="-40.0" y="26.0" />
     </edge>
     <edge source="com.group52.view.NewUserForm" target="com.group52.view.Closeable">
-      <point x="90.33333333333326" y="-59.0" />
-      <point x="952.3155729166667" y="374.0" />
-      <point x="1411.2575520833334" y="374.0" />
-      <point x="-41.25" y="26.0" />
+      <point x="135.5" y="0.0" />
+      <point x="-66.0" y="0.0" />
     </edge>
     <edge source="com.group52.view.Calendar" target="java.awt.event.ActionListener">
-      <point x="90.33333333333326" y="-59.0" />
-      <point x="1546.3155729166667" y="414.0" />
-      <point x="1610.29921875" y="414.0" />
-      <point x="1610.29921875" y="182.0" />
-      <point x="916.125" y="182.0" />
-      <point x="64.5" y="26.0" />
+      <point x="0.0" y="59.0" />
+      <point x="2360.0" y="1705.0" />
+      <point x="-129.0" y="-15.0" />
     </edge>
     <edge source="com.group52.view.EditTaskForm" target="com.group52.view.Closeable">
-      <point x="33.875" y="-125.0" />
-      <point x="1705.5447916666672" y="632.0" />
-      <point x="1892.9822395833335" y="632.0" />
-      <point x="1892.9822395833335" y="284.0" />
-      <point x="1510.2575520833334" y="284.0" />
-      <point x="57.75" y="26.0" />
+      <point x="0.0" y="-125.0" />
+      <point x="2720.0" y="370.0" />
+      <point x="66.0" y="10.0" />
     </edge>
     <edge source="com.group52.view.CreateTaskForm" target="com.group52.view.Listenable">
-      <point x="-33.875" y="-81.0" />
-      <point x="936.919791666667" y="592.0" />
-      <point x="696.5134895833335" y="592.0" />
-      <point x="696.5134895833335" y="354.0" />
-      <point x="549.1072395833335" y="354.0" />
-      <point x="-50.8125" y="26.0" />
+      <point x="40.0" y="-81.0" />
+      <point x="2040.0" y="1080.0" />
+      <point x="-135.5" y="0.0" />
     </edge>
     <edge source="com.group52.view.MainPanel" target="com.group52.view.Listenable">
-      <point x="0.0" y="-81.0" />
-      <point x="135.5" y="612.0" />
-      <point x="380.66973958333347" y="612.0" />
-      <point x="380.66973958333347" y="414.0" />
-      <point x="481.35723958333347" y="414.0" />
-      <point x="-118.5625" y="26.0" />
+      <point x="135.5" y="0.0" />
+      <point x="3000.0" y="560.0" />
+      <point x="-40.0" y="-26.0" />
     </edge>
     <edge source="com.group52.view.Calendar" target="com.group52.view.Closeable">
       <point x="0.0" y="-59.0" />
-      <point x="1455.9822395833335" y="414.0" />
-      <point x="1477.2575520833334" y="414.0" />
-      <point x="24.75" y="26.0" />
+      <point x="2360.0" y="380.0" />
+      <point x="66.0" y="20.0" />
     </edge>
     <edge source="com.group52.actions.Handler" target="com.group52.actions.XMLParse">
-      <point x="-16.125" y="-37.0" />
-      <point x="778.794791666667" y="932.0" />
-      <point x="686.794791666667" y="932.0" />
+      <point x="-129.0" y="-15.0" />
+      <point x="720.0" y="1025.0" />
       <point x="0.0" y="48.0" />
     </edge>
     <edge source="com.group52.view.Listenable" target="java.awt.event.ActionListener">
-      <point x="0.0" y="-26.0" />
-      <point x="599.9197395833335" y="192.0" />
-      <point x="838.725" y="192.0" />
-      <point x="-12.899999999999977" y="26.0" />
+      <point x="135.5" y="20.0" />
+      <point x="4080.0" y="1100.0" />
+      <point x="-120.0" y="-26.0" />
     </edge>
     <edge source="com.group52.actions.Handler" target="com.group52.view.MainPanel">
-      <point x="-112.875" y="-37.0" />
-      <point x="682.044791666667" y="962.0" />
-      <point x="169.375" y="962.0" />
-      <point x="33.875" y="81.0" />
+      <point x="-129.0" y="0.0" />
+      <point x="280.0" y="1040.0" />
+      <point x="280.0" y="600.0" />
+      <point x="-135.5" y="40.0" />
     </edge>
     <edge source="com.group52.view.NewUserForm" target="java.awt.event.ActionListener">
-      <point x="0.0" y="-59.0" />
-      <point x="861.9822395833335" y="192.0" />
-      <point x="864.5250000000001" y="192.0" />
-      <point x="12.900000000000091" y="26.0" />
+      <point x="0.0" y="59.0" />
+      <point x="120.0" y="1800.0" />
+      <point x="4200.0" y="1800.0" />
+      <point x="0.0" y="26.0" />
     </edge>
     <edge source="com.group52.view.EditTaskForm" target="java.awt.event.ActionListener">
-      <point x="101.625" y="-125.0" />
-      <point x="1773.2947916666672" y="642.0" />
-      <point x="1903.9822395833335" y="642.0" />
-      <point x="1903.9822395833335" y="162.0" />
-      <point x="967.7250000000001" y="162.0" />
-      <point x="116.10000000000014" y="26.0" />
+      <point x="0.0" y="125.0" />
+      <point x="2720.0" y="1700.0" />
+      <point x="-129.0" y="-20.0" />
     </edge>
     <edge source="com.group52.view.EditTaskForm" target="com.group52.view.Calendar">
-      <point x="-33.875" y="-125.0" />
-      <point x="1637.7947916666672" y="572.0" />
-      <point x="1523.7322395833335" y="572.0" />
-      <point x="67.75" y="59.0" />
+      <point x="-135.5" y="0.0" />
+      <point x="2400.0" y="1480.0" />
+      <point x="40.0" y="59.0" />
     </edge>
     <edge source="com.group52.view.EditTaskForm" target="com.group52.view.Listenable">
-      <point x="-101.625" y="-125.0" />
-      <point x="1570.0447916666672" y="582.0" />
-      <point x="707.5134895833335" y="582.0" />
-      <point x="707.5134895833335" y="344.0" />
-      <point x="582.9822395833335" y="344.0" />
-      <point x="-16.9375" y="26.0" />
+      <point x="135.5" y="0.0" />
+      <point x="3040.0" y="1480.0" />
+      <point x="0.0" y="26.0" />
     </edge>
     <edge source="com.group52.view.CreateTaskForm" target="com.group52.view.Calendar">
-      <point x="101.625" y="-81.0" />
-      <point x="1072.4197916666672" y="642.0" />
-      <point x="1388.2322395833335" y="642.0" />
-      <point x="-67.75" y="59.0" />
+      <point x="135.5" y="0.0" />
+      <point x="-135.5" y="0.0" />
     </edge>
     <edge source="com.group52.view.DeleteTaskForm" target="java.awt.event.ActionListener">
-      <point x="90.33333333333337" y="-48.0" />
-      <point x="1837.315572916667" y="414.0" />
-      <point x="1760.7039062500003" y="414.0" />
-      <point x="1760.7039062500003" y="172.0" />
-      <point x="941.9250000000001" y="172.0" />
-      <point x="90.30000000000007" y="26.0" />
+      <point x="135.5" y="0.0" />
+      <point x="4120.0" y="360.0" />
+      <point x="-80.0" y="-26.0" />
     </edge>
     <edge source="com.group52.view.AuthorizationForm" target="java.awt.event.ActionListener">
-      <point x="0.0" y="-59.0" />
-      <point x="1152.9822395833335" y="192.0" />
-      <point x="890.325" y="192.0" />
-      <point x="38.700000000000045" y="26.0" />
+      <point x="135.5" y="0.0" />
+      <point x="4160.0" y="240.0" />
+      <point x="-40.0" y="-26.0" />
     </edge>
     <edge source="com.group52.actions.Main" target="com.group52.actions.ServerDialog">
-      <point x="42.75" y="-26.0" />
-      <point x="837.669791666667" y="1086.0" />
-      <point x="1985.4822395833335" y="1086.0" />
-      <point x="1985.4822395833335" y="962.0" />
-      <point x="1977.1697916666672" y="962.0" />
-      <point x="30.0" y="48.0" />
+      <point x="85.5" y="0.0" />
+      <point x="-120.0" y="0.0" />
     </edge>
     <edge source="com.group52.actions.Handler" target="com.group52.actions.ServerDialog">
-      <point x="112.875" y="-37.0" />
-      <point x="907.794791666667" y="962.0" />
-      <point x="1917.1697916666672" y="962.0" />
-      <point x="-30.0" y="48.0" />
+      <point x="-129.0" y="-30.0" />
+      <point x="1320.0" y="1010.0" />
+      <point x="0.0" y="48.0" />
     </edge>
     <edge source="com.group52.view.DeleteTaskForm" target="com.group52.view.Listenable">
-      <point x="-90.33333333333326" y="-48.0" />
-      <point x="1656.6489062500002" y="304.0" />
-      <point x="718.4822395833335" y="304.0" />
-      <point x="118.5625" y="26.0" />
+      <point x="0.0" y="48.0" />
+      <point x="3800.0" y="1080.0" />
+      <point x="135.5" y="0.0" />
     </edge>
     <edge source="java.awt.event.ActionListener" target="java.util.EventListener">
-      <point x="0.0" y="-26.0" />
-      <point x="0.0" y="15.0" />
+      <point x="129.0" y="0.0" />
+      <point x="-60.0" y="0.0" />
     </edge>
     <edge source="com.group52.view.AuthorizationForm" target="com.group52.view.Closeable">
-      <point x="90.33333333333337" y="-59.0" />
-      <point x="1243.315572916667" y="384.0" />
-      <point x="1427.7575520833334" y="384.0" />
-      <point x="-24.75" y="26.0" />
+      <point x="-135.5" y="0.0" />
+      <point x="2040.0" y="240.0" />
+      <point x="40.0" y="-26.0" />
     </edge>
     <edge source="com.group52.view.NotificationForm" target="com.group52.view.Listenable">
-      <point x="0.0" y="-48.0" />
-      <point x="526.6697395833335" y="414.0" />
-      <point x="515.2322395833335" y="414.0" />
-      <point x="-84.6875" y="26.0" />
+      <point x="0.0" y="48.0" />
+      <point x="0.0" y="-26.0" />
     </edge>
     <edge source="com.group52.actions.Main" target="com.group52.actions.Handler">
-      <point x="-14.25" y="-26.0" />
-      <point x="780.669791666667" y="1076.0" />
-      <point x="730.419791666667" y="1076.0" />
-      <point x="-64.5" y="37.0" />
+      <point x="0.0" y="26.0" />
+      <point x="1040.0" y="1017.5" />
+      <point x="-129.0" y="-22.5" />
     </edge>
     <edge source="com.group52.view.MainPanel" target="java.awt.event.ActionListener">
-      <point x="-90.33333333333326" y="-81.0" />
-      <point x="45.16666666666674" y="602.0" />
-      <point x="131.05807291666702" y="602.0" />
-      <point x="131.05807291666702" y="152.0" />
-      <point x="735.525" y="152.0" />
-      <point x="-116.10000000000002" y="26.0" />
+      <point x="-135.5" y="0.0" />
+      <point x="240.0" y="560.0" />
+      <point x="240.0" y="1720.0" />
+      <point x="-129.0" y="0.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6282485875706215" x="831.5998201438848" y="738.5" />
+  <settings layout="Hierarchic Group" zoom="0.5282485875706215" x="1191.9216446858027" y="759.7377812257564" />
   <SelectedNodes />
   <Categories>
     <Category>Methods</Category>

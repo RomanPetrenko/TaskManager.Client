@@ -15,7 +15,7 @@ public class CreateTaskForm implements Listenable, Closeable {
     }
 
     public String getTime() {
-        return new Calendar().getDate();
+        return new Calendar().getTime();
     }
 
     public String getContact() {

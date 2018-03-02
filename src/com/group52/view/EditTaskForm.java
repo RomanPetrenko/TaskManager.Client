@@ -15,7 +15,7 @@ public class EditTaskForm implements Listenable, Closeable {
     public void showOldTime(String time) { }
 
     public String getNewTime() {
-        return new Calendar().getDate();
+        return new Calendar().getTime();
     }
 
     public void showOldDescription(String time) { }

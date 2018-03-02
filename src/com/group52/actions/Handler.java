@@ -26,7 +26,11 @@ public class Handler implements ActionListener {
                 CreateTaskForm taskForm = new CreateTaskForm();
                 serverDialog.sendXMLRequest("create");
                 if (serverDialog.getResponseFromServer().equals("OK")){
-                    serverDialog.sendXMLToServer(XMLParse.parseTaskToXML(taskForm.getTitle()));
+                    String title = taskForm.getTitle();
+                    String description = taskForm.getDescription();
+                    String time = taskForm.getTime();
+                    String contact = taskForm.getContact();
+                    serverDialog.sendXMLToServer(XMLParse.parseTaskToXML(title,description,time,contact));
                 }
 
             }

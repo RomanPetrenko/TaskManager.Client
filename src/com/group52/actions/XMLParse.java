@@ -8,10 +8,16 @@ public class XMLParse {
         return new File("output.xml");
     }
 
-    public static File  parseTaskToXML(String title) {
+    public static File  parseTaskToXML(String title, String description, String time, String contact) {
         return new File("output.xml");
     }
 
-    public static void parseFromXML(File task) { }
+    public static File  parseRequestToXML(String title) {
+        return new File("output.xml");
+    }
+
+    public static String parseFromXML(File file) {
+        return "string";
+    }
 
 }

@@ -4,19 +4,19 @@ import java.awt.event.ActionListener;
 
 public class Calendar implements Listenable, Closeable {
 
-    private String date;
+    private String time;
 
     public Calendar() { }
 
-    public String getDate() {
-        return date;
+    public String getTime() {
+        return time;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTime(String date) {
+        this.time = date;
     }
 
     public void close() { }
 
-    public void addTasksListener(ActionListener actionListener) { }
+    public void addListener(ActionListener actionListener) { }
 }

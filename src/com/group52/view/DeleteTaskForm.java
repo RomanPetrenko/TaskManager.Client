@@ -12,5 +12,5 @@ public class DeleteTaskForm implements Listenable, Closeable {
 
     public void close () { }
 
-    public void addTasksListener(ActionListener actionListener) { }
+    public void addListener(ActionListener actionListener) { }
 }

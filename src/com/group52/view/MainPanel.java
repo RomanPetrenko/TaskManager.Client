@@ -43,7 +43,7 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
         this.setVisible(false);
     }
 
-    public void addTasksListener(ActionListener actionListener) { }
+    public void addListener(ActionListener actionListener) { }
 
     public void displayErrorMessage(String errorMessage) {
         JOptionPane.showMessageDialog(this, errorMessage);

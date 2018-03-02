@@ -16,7 +16,7 @@ public class ServerDialog {
 
     public void sendXMLRequest(String type) {
         if (type.equals("Create")) {
-            //out.sendRequest
+            out.print(XMLParse.parseRequestToXML("Create"));
         }
     }
 

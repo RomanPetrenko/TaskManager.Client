@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE socket SYSTEM "xml/client.dtd">
+<socket>
+    <client login="Roman" password="Petrenko">
+        <session_id>1</session_id>
+    </client>
+    <action>View</action>
+    <code>200</code>
+    <status>OK</status>
+    <task title="Task" time="0" start="11.03.2018 12:00" end="11.03.2018 18:00" interval="60" active="1"></task>
+</socket>

@@ -4,15 +4,15 @@ import java.io.File;
 
 public class XMLParse {
 
-    public static File parseUserToXML(String login, String password) {
+    public static File parseRequestToXML(String request) {
         return new File("output.xml");
     }
 
-    public static File  parseTaskToXML(String title, String description, String time, String contact) {
+    public static File parseUserToXML(String request, String login, String password) {
         return new File("output.xml");
     }
 
-    public static File  parseRequestToXML(String title) {
+    public static File  parseTaskToXML(String request, String title, String description, String time) {
         return new File("output.xml");
     }
 
@@ -20,4 +20,7 @@ public class XMLParse {
         return "string";
     }
 
+    public static String parseTasksFromXML(File file) {
+        return "string";
+    }
 }

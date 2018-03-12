@@ -1,24 +1,55 @@
 package com.group52.view;
 
+import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class AuthorizationForm implements Listenable, Closeable {
+public class AuthorizationForm extends MainPanel implements Listenable, Closeable {
 
-    private String login;
-    private String password;
+    private JFrame authorizationForm;
+    private JPasswordField closePasswordField;
 
-    public AuthorizationForm() { }
+    public AuthorizationForm() {
+
+        authorizationForm = new JFrame("Sign in");
+        authorizationForm.setSize(350,450);
+        authorizationForm.setLocationRelativeTo(null);
+        authorizationForm.setResizable(false);
+
+        authorizationForm.add(loginLabel);
+        JLabel passwordLabel = new JLabel("Password");
+        passwordLabel.setBounds(140,55,280,15);
+        authorizationForm.add(passwordLabel);
+
+        authorizationForm.add(loginField);
+        closePasswordField = new JPasswordField(20);
+        closePasswordField.setBounds(30,70,280,30);
+        authorizationForm.add(closePasswordField);
+
+        authorizationForm.add(confirmButton);
+        authorizationForm.add(cancelButton);
+
+        authorizationForm.setLayout(null);
+    }
 
     public String getLogin() {
-        return login;
+        return loginField.getText();
     }
 
     public String getPassword() {
-        return password;
+        return closePasswordField.getToolTipText();
     }
 
-    public void close () { }
+    public void open() {
+        authorizationForm.setVisible(true);
+    }
 
-    public void addListener(ActionListener actionListener) { }
+    public void close () {
+        authorizationForm.setVisible(false);
+    }
+
+    public void addListener(ActionListener actionListener) {
+        confirmButton.addActionListener(actionListener);
+        cancelButton.addActionListener(actionListener);
+    }
 
 }

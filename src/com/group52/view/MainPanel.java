@@ -28,6 +28,7 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
     public JButton exitButton = new JButton("Exit");
 
     public JCheckBox activeBox = new JCheckBox("is Active");
+    public JSpinner spinner = new JSpinner();
 
     public MainPanel() {
         JPanel mainPanel = new JPanel();
@@ -52,6 +53,7 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
         calendarField.setBounds(30,120,280,30);
 
         activeBox.setBounds(30, 230, 80, 30);
+        spinner.setBounds(30, 200, 80, 30);
 
         confirmButton.setBounds(30,300,280,40);
         unrepeatableTaskFormButton.setBounds(30,300,200,40);
@@ -95,7 +97,11 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
         descriptionField.setText("");
     }
 
-    public void close () {
+    public void open() {
+        this.setVisible(true);
+    }
+
+    public void close() {
         this.setVisible(false);
     }
 
@@ -115,6 +121,8 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
         JOptionPane.showMessageDialog(this, errorMessage);
     }
 
-
+    public void displayMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
 }
 

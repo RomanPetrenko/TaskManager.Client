@@ -17,7 +17,7 @@ public class Calendar extends  MainPanel implements Listenable, Closeable {
     private String time;
     private JDatePickerImpl datePicker;
 
-    public Calendar(boolean isDatePicker) {
+    public Calendar(boolean isCalendarField) {
         UtilDateModel model = new UtilDateModel();
 
         Properties p = new Properties();
@@ -26,20 +26,16 @@ public class Calendar extends  MainPanel implements Listenable, Closeable {
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
         this.datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        datePicker.setBounds(30,120,120,30);
 
-
-        if (isDatePicker) {
+        if (isCalendarField) {
             calendarField.add(datePicker);
         }
-        else {
-            JFrame frame = new JFrame();
-            frame.setSize(300, 300);
-            frame.setLocationRelativeTo(null);
-            frame.setResizable(false);
-            frame.setVisible(true);
-            frame.add(datePanel);
-        }
 
+    }
+
+    public JDatePickerImpl getDatePicker() {
+        return datePicker;
     }
 
     public String getTime() {

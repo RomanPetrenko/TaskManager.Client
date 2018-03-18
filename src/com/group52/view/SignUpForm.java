@@ -3,13 +3,13 @@ package com.group52.view;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class NewUserForm extends MainPanel implements Listenable, Closeable {
+public class SignUpForm extends MainPanel implements Listenable, Closeable {
 
     private JFrame userForm;
     private JTextField openPasswordField;
     private JTextField repeatPasswordField;
 
-    public NewUserForm() {
+    public SignUpForm() {
         userForm = new JFrame("Sign up");
         userForm.setSize(350,450);
         userForm.setLocationRelativeTo(null);

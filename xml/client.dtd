@@ -1,11 +1,11 @@
 <!ELEMENT socket (client,action,code,status,task*)>
-<!ELEMENT client (session_id)>
+<!ELEMENT client (id)>
 <!ATTLIST client
 login CDATA #REQUIRED
 password CDATA #REQUIRED
 >
-<!ELEMENT session_id (#PCDATA)>
-<!ELEMENT action ("avtorization"|"add"|"edit"|"delete"|"view"|"close")>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT action ("oneMoreUser"|"client"|"notification"|"add"|"edit"|"delete"|"view"|"close")>
 <!ELEMENT code ("200"|"500")>
 <!ELEMENT status ("OK "|"False")>
 <!ELEMENT task EMPTY>
@@ -15,5 +15,5 @@ time CDATA #REQUIRED
 start CDATA #REQUIRED
 end  CDATA #REQUIRED
 interval  CDATA #REQUIRED
-active (0|1) #REQUIRED
+active (true|false) #REQUIRED
 >

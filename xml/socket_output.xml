@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
-<!DOCTYPE socket SYSTEM "xml/client.dtd">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE socket SYSTEM  "xml\client.dtd">
 <socket>
-    <client login="Roman" password="Petrenko">
-        <session_id>1</session_id>
-    </client>
-    <action>View</action>
+    <action>Create</action>
+    <code>0</code>
+    <task title="sdf" time="2" start="2" end="2" interval="2" active="true"/>
 </socket>

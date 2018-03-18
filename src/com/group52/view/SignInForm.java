@@ -3,12 +3,12 @@ package com.group52.view;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class AuthorizationForm extends MainPanel implements Listenable, Closeable {
+public class SignInForm extends MainPanel implements Listenable, Closeable {
 
     private JFrame authorizationForm;
     private JPasswordField closePasswordField;
 
-    public AuthorizationForm() {
+    public SignInForm() {
 
         authorizationForm = new JFrame("Sign in");
         authorizationForm.setSize(350,450);
@@ -36,7 +36,7 @@ public class AuthorizationForm extends MainPanel implements Listenable, Closeabl
     }
 
     public String getPassword() {
-        return closePasswordField.getToolTipText();
+        return String.valueOf(closePasswordField.getPassword());
     }
 
     public void open() {

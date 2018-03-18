@@ -20,8 +20,8 @@ public class ServerDialog {
     }
 
     public ServerDialog() { //is needed to be delete after testing
-        File input_file = new File("xml//socket_input.xml");
-        File output_file = new File("xml//socket_output.xml");
+        File input_file = new File("xml/socket_input.xml");
+        File output_file = new File("xml/socket_output.xml");
         FileInputStream fis = null;
         FileOutputStream fos = null;
         try {
@@ -59,7 +59,7 @@ public class ServerDialog {
     }
 
     private File getFile(BufferedInputStream input) throws IOException {
-        File file = new File("xml//output.xml");
+        File file = new File("xml/answer.xml");
         FileOutputStream fos = new FileOutputStream(file);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
 

@@ -8,6 +8,7 @@ public class AddTaskForm extends MainPanel implements Listenable {
     private JFrame taskForm;
     public JButton unrepeatableTaskButton = new JButton("Create task");
     public JButton repeatableTaskButton = new JButton("Create task");
+    public Calendar calendar = new Calendar(false);
 
     public AddTaskForm(String taskType) throws NullPointerException {
         taskForm = new JFrame();
@@ -19,15 +20,16 @@ public class AddTaskForm extends MainPanel implements Listenable {
         activeBox.setSelected(true);
         taskForm.add(titleField);
         taskForm.add(descriptionField);
+        taskForm.add(calendar.getDatePicker());
 
-        //new Calendar(true);
-        //taskForm.add(calendarField);
 
         taskForm.add(activeBox);
+        taskForm.add(spinner);
         taskForm.add(titleLabel);
         taskForm.add(descriptionLabel);
         taskForm.add(cancelButton);
         taskForm.setLayout(null);
+
 
         if (taskType.equals("Unrepeatable")) {
             unrepeatableTaskButton.setBounds(30,300,280,40);
@@ -51,7 +53,8 @@ public class AddTaskForm extends MainPanel implements Listenable {
     }
 
     public String getTime() {
-        return "date + time >> format to Date()";
+        //"date + time >> format to Date()"
+        return calendar.getTime();
     }
 
     public void open() {

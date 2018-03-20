@@ -36,7 +36,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.group52.actions.Main
+                            <mainClass>com.group52.client.actions.Main
                             </mainClass>
                             <classpathPrefix>dependency-jars/</classpathPrefix>
                         </manifest>
@@ -58,7 +58,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.group52.actions.Main
+                            <mainClass>com.group52.client.actions.Main
                             </mainClass>
                         </manifest>
                     </archive>

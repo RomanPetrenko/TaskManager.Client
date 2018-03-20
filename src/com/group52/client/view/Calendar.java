@@ -1,20 +1,18 @@
-package com.group52.view;
+package com.group52.client.view;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Properties;
 
-public class Calendar extends  MainPanel implements Listenable, Closeable {
+public class Calendar extends  MainPanel {
 
-    private String time;
     private JDatePickerImpl datePicker;
 
     public Calendar(boolean isCalendarField) {
@@ -25,13 +23,16 @@ public class Calendar extends  MainPanel implements Listenable, Closeable {
         p.put("text.month", "Month");
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-        this.datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-        datePicker.setBounds(30,120,120,30);
+        datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
         if (isCalendarField) {
-            calendarField.add(datePicker);
+            JFrame frame = new JFrame();
+            frame.setSize(300, 300);
+            frame.setLocationRelativeTo(null);
+            frame.setResizable(false);
+            frame.setVisible(true);
+            frame.add(datePanel);
         }
-
     }
 
     public JDatePickerImpl getDatePicker() {
@@ -42,14 +43,6 @@ public class Calendar extends  MainPanel implements Listenable, Closeable {
         Date selectedDate = (Date) datePicker.getModel().getValue();
         return selectedDate.toString();
     }
-
-    public void setTime(String date) {
-        this.time = date;
-    }
-
-    public void close() { }
-
-    public void addListener(ActionListener actionListener) { }
 
     public class DateLabelFormatter extends JFormattedTextField.AbstractFormatter {
 

@@ -1,4 +1,4 @@
-package com.group52.actions;
+package com.group52.client.actions;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -7,48 +7,50 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class XMLParse {
 
     private static Client client;
 
-    @XmlRootElement(name = "client")
+    @XmlRootElement(name = "user")
     @XmlAccessorType(XmlAccessType.FIELD)
-    static class Client {
+    private static class Client {
 
         @XmlAttribute(name = "login")
         String login;
         @XmlAttribute(name = "password")
-        int password;
+        String password;
         @XmlElement
         int id;
 
-        public String getLogin() {
+        String getLogin() {
             return login;
         }
 
-        public void setLogin(String login) {
+        void setLogin(String login) {
             this.login = login;
         }
 
-        public int getPassword() {
+        String getPassword() {
             return password;
         }
 
-        public void setPassword(int password) {
+        void setPassword(String password) {
             this.password = password;
         }
 
-        public int getId() {
+        int getId() {
             return id;
         }
 
-        public void setId(int id) {
+        void setId(int id) {
             this.id = id;
         }
-        private Client(){}
+        Client(){}
 
-        private Client(String login, int password, int id) {
+        Client(String login, String password, int id) {
             setLogin(login);
             setPassword(password);
             setId(id);
@@ -58,7 +60,7 @@ public class XMLParse {
 
     @XmlRootElement (name = "socket")
     @XmlAccessorType(XmlAccessType.FIELD)
-    static class Socket {
+    private static class Socket {
 
         @XmlElement
         Client client;
@@ -73,62 +75,69 @@ public class XMLParse {
         String status;
 
         @XmlElement(name = "task")
-        Task task;
+        ArrayList<XMLParse.Task> tasks;
 
-        public Task getTask() {
-            return task;
+        List<Task> getTasks() {
+            return tasks;
         }
 
-        public void setTask(Task task) {
-            this.task = task;
+        void setTasks(ArrayList<XMLParse.Task> tasks) {
+            this.tasks = tasks;
         }
 
-        public Client getClient() {
+        Client getClient() {
             return client;
         }
 
-        public void setClient(Client client) {
+        void setClient(Client client) {
             this.client = client;
         }
 
-        public String getAction() {
+        String getAction() {
             return action;
         }
 
-        public void setAction(String action) {
+        void setAction(String action) {
             this.action = action;
         }
 
-        public int getCode() {
+        int getCode() {
             return code;
         }
 
-        public void setCode(int code) {
+        void setCode(int code) {
             this.code = code;
         }
 
-        public String getStatus() {
+        String getStatus() {
             return status;
         }
 
-        public void setStatus(String status) {
+        void setStatus(String status) {
             this.status = status;
         }
 
-        private Socket(){}
+        Socket(){}
 
-        private Socket(Client client, String action){
+        Socket(Client client, String action){
             setClient(client);
             setAction(action);
+            tasks = new ArrayList<Task>();
         }
 
+        void addTask(XMLParse.Task task){
+            tasks.add(task);
+        }
     }
 
     @XmlRootElement (name = "task")
     @XmlAccessorType(XmlAccessType.FIELD)
-    static class Task {
+    private static class Task {
         @XmlAttribute(name = "title")
         String title;
+
+        @XmlAttribute(name = "description")
+        String description;
 
         @XmlAttribute(name = "time")
         long time;
@@ -145,58 +154,67 @@ public class XMLParse {
         @XmlAttribute(name = "active")
         boolean active;
 
-        public String getTitle() {
+        String getTitle() {
             return title;
         }
 
-        public void setTitle(String title) {
+        void setTitle(String title) {
             this.title = title;
         }
 
-        public long getTime() {
+        String getDescription() {
+            return description;
+        }
+
+        void setDescription(String description) {
+            this.description = description;
+        }
+
+        long getTime() {
             return time;
         }
 
-        public void setTime(long time) {
+        void setTime(long time) {
             this.time = time;
         }
 
-        public long getStart() {
+        long getStart() {
             return start;
         }
 
-        public void setStart(long start) {
+        void setStart(long start) {
             this.start = start;
         }
 
-        public long getEnd() {
+        long getEnd() {
             return end;
         }
 
-        public void setEnd(long end) {
+        void setEnd(long end) {
             this.end = end;
         }
 
-        public int getInterval() {
+        int getInterval() {
             return interval;
         }
 
-        public void setInterval(int interval) {
+        void setInterval(int interval) {
             this.interval = interval;
         }
 
-        public boolean isActive() {
+        boolean isActive() {
             return active;
         }
 
-        public void setActive(boolean active) {
+        void setActive(boolean active) {
             this.active = active;
         }
 
-        private Task(){}
-        
-        private Task(String title, long time, long start, long end, int interval, boolean active) {
+        Task(){}
+
+        Task(String title, String description, long time, long start, long end, int interval, boolean active) {
             setTitle(title);
+            setDescription(description);
             setTime(time);
             setStart(start);
             setEnd(end);
@@ -221,8 +239,12 @@ public class XMLParse {
         return unmarshaller;
     }
 
-    public static void createClient(String login, int password, int id) {
+    public static void createClient(String login, String password, int id) {
         client = new Client(login,password, id);
+    }
+
+    public static void setId(int id) {
+        client.setId(id);
     }
 
     public static File parseRequestToXML(String request) throws JAXBException {
@@ -232,29 +254,13 @@ public class XMLParse {
         return file;
     }
 
-    public static File parseTaskToXML(String request, String title, String description, String time, boolean active)
-            throws JAXBException {
+    public static File parseTaskToXML(String request, String title, String description, long time,
+                                      long start, long end, int interval, boolean active) throws JAXBException {
         File file = new File("xml/" + request + ".xml");
         Socket socket = new Socket(client, request);
-        socket.setTask(new Task(title, 2,2,2,2,active));
+        socket.addTask(new Task(title,description,time,start,end,interval,active));
         createMarshaller().marshal(socket, file);
         return file;
-    }
-
-    public static int getCodeFromXML(File file) throws JAXBException {
-        XMLParse.Socket socket = (XMLParse.Socket) createUnmarshaller().unmarshal(file);
-        return socket.getCode();
-    }
-
-    public static String getUserFromXML(File file) throws JAXBException {
-        XMLParse.Socket socket = (XMLParse.Socket) createUnmarshaller().unmarshal(file);
-        return "login: " + socket.getClient().getLogin() + "\nPass: " + socket.getClient().getPassword();
-    }
-
-    public static String getTaskFromXML(File file) throws JAXBException {
-        XMLParse.Socket socket = (XMLParse.Socket) createUnmarshaller().unmarshal(file);
-        Task task = socket.getTask();
-        return task.getTitle();
     }
 
     public static String getActionFromXML(File file) throws JAXBException {
@@ -262,4 +268,42 @@ public class XMLParse {
         return socket.getAction();
     }
 
+    public static int getCodeFromXML(File file) throws JAXBException {
+        XMLParse.Socket socket = (XMLParse.Socket) createUnmarshaller().unmarshal(file);
+        return socket.getCode();
+    }
+
+    public static String getStatusFromXML(File file) throws JAXBException {
+        XMLParse.Socket socket = (XMLParse.Socket) createUnmarshaller().unmarshal(file);
+        return socket.getStatus();
+    }
+
+    public static int getUserIdFromXML(File file) throws JAXBException {
+        XMLParse.Socket socket = (XMLParse.Socket) createUnmarshaller().unmarshal(file);
+        return socket.getClient().getId();
+    }
+
+    public static String getTaskFromXML(File file) throws JAXBException {
+        XMLParse.Socket socket = (XMLParse.Socket) createUnmarshaller().unmarshal(file);
+        List<XMLParse.Task> tasks = socket.getTasks();
+        StringBuilder sb = new StringBuilder();
+        for (XMLParse.Task task: tasks) {
+            sb.append(task.getTitle() + ":");
+            if (task.getInterval() == 0) {
+                sb.append(" time: " + new Date(task.getTime()));
+            }
+            else {
+                sb.append(" start: " + new Date(task.getStart()));
+                sb.append(" end: " + new Date(task.getEnd()));
+                sb.append(" interval: " + task.getInterval());
+            }
+            if (task.isActive()) sb.append(" (active) ");
+            else sb.append(" (inactive) ");
+            sb.append("\n");
+            sb.append("Description: ");
+            sb.append(task.getDescription());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }

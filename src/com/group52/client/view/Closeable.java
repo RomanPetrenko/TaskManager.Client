@@ -1,4 +1,4 @@
-package com.group52.view;
+package com.group52.client.view;
 
 public interface Closeable {
     void close ();

@@ -1,21 +1,33 @@
-package com.group52.view;
+package com.group52.client.view;
+
+import org.jdatepicker.impl.JDatePickerImpl;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.*;
 
 public class MainPanel extends JFrame implements Listenable, Closeable {
 
     private JTextArea tasksField = new JTextArea();
 
-    public JTextField titleField = new JTextField(20);
-    public JTextField descriptionField = new JTextField(20);
-    public JTextField loginField = new JTextField(20);
-    public JTextField calendarField = new JTextField();
+    protected JTextField titleField = new JTextField(20);
+    protected JTextField descriptionField = new JTextField(20);
+    protected JTextField loginField = new JTextField(20);
+    protected JTextField intervalField = new JTextField(20);
 
-    public JLabel titleLabel = new JLabel("Title");
-    public JLabel descriptionLabel = new JLabel("Description");
-    public JLabel loginLabel = new JLabel("Login");
+    protected JLabel titleLabel = new JLabel("Title");
+    protected JLabel descriptionLabel = new JLabel("Description");
+    protected JLabel loginLabel = new JLabel("Login");
+    protected JLabel startDateLabel = new JLabel("Start date");
+    protected JLabel endDateLabel = new JLabel("End date");
+    protected JLabel startHoursLabel = new JLabel("Hour");
+    protected JLabel endHoursLabel = new JLabel("Hour");
+    protected JLabel startMinutesLabel = new JLabel("Minute");
+    protected JLabel endMinutesLabel = new JLabel("Minute");
+    protected JLabel intervalLabel = new JLabel("Interval(seconds)");
 
     public JButton confirmButton = new JButton("Confirm");
     public JButton unrepeatableTaskFormButton = new JButton("Create task");
@@ -28,7 +40,11 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
     public JButton exitButton = new JButton("Exit");
 
     public JCheckBox activeBox = new JCheckBox("is Active");
-    public JSpinner spinner = new JSpinner();
+
+    protected JSpinner startHoursSpinner = new JSpinner();
+    protected JSpinner endHoursSpinner = new JSpinner();
+    protected JSpinner startMinutesSpinner = new JSpinner();
+    protected JSpinner endMinutesSpinner = new JSpinner();
 
     public MainPanel() {
         JPanel mainPanel = new JPanel();
@@ -46,14 +62,25 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
         titleLabel.setBounds(150,5,280,15);
         descriptionLabel.setBounds(150,55,280,15);
         loginLabel.setBounds(150,5,280,15);
+        startDateLabel.setBounds(30,105,140,15);
+        endDateLabel.setBounds(30,155,140,15);
+        startHoursLabel.setBounds(180,105,60,15);
+        endHoursLabel.setBounds(180,155,60,15);
+        startMinutesLabel.setBounds(250,105,60,15);
+        endMinutesLabel.setBounds(250,155,60,15);
+        intervalLabel.setBounds(120, 215, 180, 15);
 
         titleField.setBounds(30,20,280,30);
         descriptionField.setBounds(30,70,280,30);
         loginField.setBounds(30,20,280,30);
-        calendarField.setBounds(30,120,280,30);
+        intervalField.setBounds(120, 230, 180, 30);
 
         activeBox.setBounds(30, 230, 80, 30);
-        spinner.setBounds(30, 200, 80, 30);
+
+        startHoursSpinner.setBounds(180,120,60,30);
+        startMinutesSpinner.setBounds(250,120,60,30);
+        endHoursSpinner.setBounds(180,170,60,30);
+        endMinutesSpinner.setBounds(250,170,60,30);
 
         confirmButton.setBounds(30,300,280,40);
         unrepeatableTaskFormButton.setBounds(30,300,200,40);
@@ -92,9 +119,29 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
         tasksField.setText(taskList);
     }
 
-    public void flushFields() {
+    protected void flushFields() {
         titleField.setText("");
         descriptionField.setText("");
+        startHoursSpinner.setValue(0);
+        endHoursSpinner.setValue(0);
+        startMinutesSpinner.setValue(0);
+        endMinutesSpinner.setValue(0);
+    }
+
+    protected Date parseTimeToDate(JDatePickerImpl calendar, JSpinner hours, JSpinner minutes) throws ParseException {
+        String datePattern = "yyyy-MM-dd HH:mm";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
+
+        StringBuilder sb = new StringBuilder(String.valueOf(calendar.getModel().getYear()));
+        sb.append("-");
+        sb.append(String.valueOf(calendar.getModel().getMonth()));
+        sb.append("-");
+        sb.append(String.valueOf(calendar.getModel().getDay()));
+        sb.append(" ");
+        sb.append(String.valueOf(hours.getModel().getValue()));
+        sb.append(":");
+        sb.append(String.valueOf(minutes.getModel().getValue()));
+        return dateFormat.parse(sb.toString());
     }
 
     public void open() {

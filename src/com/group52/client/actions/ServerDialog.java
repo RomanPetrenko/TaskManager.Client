@@ -1,4 +1,4 @@
-package com.group52.actions;
+package com.group52.client.actions;
 
 import org.apache.log4j.Logger;
 

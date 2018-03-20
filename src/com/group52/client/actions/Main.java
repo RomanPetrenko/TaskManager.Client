@@ -1,11 +1,7 @@
-package com.group52.actions;
+package com.group52.client.actions;
 
-import com.group52.view.*;
+import com.group52.client.view.MainPanel;
 import org.apache.log4j.Logger;
-
-import javax.xml.bind.JAXBException;
-import java.io.File;
-import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,8 +18,7 @@ public class Main {
         }
         */
 
-        ServerDialog serverDialog = new ServerDialog();
+        ServerDialog serverDialog = new ServerDialog();//for testing
         new Handler(theView, serverDialog);
-
     }
 }

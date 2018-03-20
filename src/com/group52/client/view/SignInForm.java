@@ -1,4 +1,4 @@
-package com.group52.view;
+package com.group52.client.view;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

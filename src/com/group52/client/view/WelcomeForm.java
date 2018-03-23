@@ -15,11 +15,16 @@ public class WelcomeForm implements Listenable, Closeable {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img/welcome.png"));
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img/icon.png"));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        signUpButton.setBounds(40,110,100,40);
-        signInButton.setBounds(150,110,100,40);
+        JLabel img;
+        img = new JLabel(new ImageIcon("img/welcome.png"));
+        img.setBounds(10, 10, 280,110);
+        frame.add(img);
+
+        signUpButton.setBounds(20,120,120,40);
+        signInButton.setBounds(160,120,120,40);
         frame.add(signUpButton);
         frame.add(signInButton);
         frame.setVisible(true);
@@ -28,6 +33,11 @@ public class WelcomeForm implements Listenable, Closeable {
     @Override
     public void close() {
         frame.setVisible(false);
+    }
+
+    @Override
+    public void open() {
+        frame.setVisible(true);
     }
 
     @Override

@@ -60,22 +60,22 @@ public class XMLParse {
 
     @XmlRootElement (name = "socket")
     @XmlAccessorType(XmlAccessType.FIELD)
-    private static class Socket {
+    static class Socket {
 
         @XmlElement
-        Client client;
+        private Client client;
 
         @XmlElement
-        String action;
+        private String action;
 
         @XmlElement
-        int code;
+        private int code;
 
         @XmlElement
-        String status;
+        private String status;
 
         @XmlElement(name = "task")
-        ArrayList<XMLParse.Task> tasks;
+        private ArrayList<XMLParse.Task> tasks;
 
         List<Task> getTasks() {
             return tasks;
@@ -132,27 +132,27 @@ public class XMLParse {
 
     @XmlRootElement (name = "task")
     @XmlAccessorType(XmlAccessType.FIELD)
-    private static class Task {
+    static class Task {
         @XmlAttribute(name = "title")
-        String title;
+        private String title;
 
         @XmlAttribute(name = "description")
-        String description;
+        private String description;
 
         @XmlAttribute(name = "time")
-        long time;
+        private long time;
 
         @XmlAttribute(name = "start")
-        long start;
+        private long start;
 
         @XmlAttribute(name = "end")
-        long end;
+        private long end;
 
         @XmlAttribute(name = "interval")
-        int interval;
+        private int interval;
 
         @XmlAttribute(name = "active")
-        boolean active;
+        private boolean active;
 
         String getTitle() {
             return title;
@@ -221,6 +221,27 @@ public class XMLParse {
             setInterval(interval);
             setActive(active);
         }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder();
+            sb.append(getTitle() + ":");
+            if (getInterval() == 0) {
+                sb.append(" time: " + new Date(getTime()));
+            }
+            else {
+                sb.append(" start: " + new Date(getStart()));
+                sb.append(" end: " + new Date(getEnd()));
+                sb.append(" interval: " + getInterval());
+            }
+            if (isActive()) sb.append(" (active) ");
+
+            else sb.append(" (inactive) ");
+            sb.append(" Description: ");
+            sb.append(getDescription());
+            sb.append("\n");
+            return sb.toString();
+        }
     }
 
     private static Marshaller createMarshaller() throws JAXBException {
@@ -235,7 +256,7 @@ public class XMLParse {
     private static Unmarshaller createUnmarshaller() throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(XMLParse.Socket.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        //unmarshaller.setProperty(javax.xml.XMLConstants.ACCESS_EXTERNAL_DTD, Boolean.TRUE);
+        //unmarshaller.setProperty(javax.xml.XMLConstants.ACCESS_EX+TERNAL_DTD, Boolean.TRUE);
         return unmarshaller;
     }
 
@@ -263,6 +284,24 @@ public class XMLParse {
         return file;
     }
 
+    public static File parseTaskToXML(String request, XMLParse.Task oldTask, String title, String description, long time,
+                                      long start, long end, int interval, boolean active) throws JAXBException {
+        File file = new File("xml/" + request + ".xml");
+        Socket socket = new Socket(client, request);
+        socket.addTask(oldTask);
+        socket.addTask(new Task(title,description,time,start,end,interval,active));
+        createMarshaller().marshal(socket, file);
+        return file;
+    }
+
+    public static File parseTaskToXML(String request, XMLParse.Task task) throws JAXBException {
+        File file = new File("xml/" + request + ".xml");
+        Socket socket = new Socket(client, request);
+        socket.addTask(task);
+        createMarshaller().marshal(socket, file);
+        return file;
+    }
+
     public static String getActionFromXML(File file) throws JAXBException {
         XMLParse.Socket socket = (XMLParse.Socket) createUnmarshaller().unmarshal(file);
         return socket.getAction();
@@ -283,27 +322,18 @@ public class XMLParse {
         return socket.getClient().getId();
     }
 
-    public static String getTaskFromXML(File file) throws JAXBException {
+    public static String getTasksFromXML(File file) throws JAXBException {
         XMLParse.Socket socket = (XMLParse.Socket) createUnmarshaller().unmarshal(file);
         List<XMLParse.Task> tasks = socket.getTasks();
         StringBuilder sb = new StringBuilder();
         for (XMLParse.Task task: tasks) {
-            sb.append(task.getTitle() + ":");
-            if (task.getInterval() == 0) {
-                sb.append(" time: " + new Date(task.getTime()));
-            }
-            else {
-                sb.append(" start: " + new Date(task.getStart()));
-                sb.append(" end: " + new Date(task.getEnd()));
-                sb.append(" interval: " + task.getInterval());
-            }
-            if (task.isActive()) sb.append(" (active) ");
-            else sb.append(" (inactive) ");
-            sb.append("\n");
-            sb.append("Description: ");
-            sb.append(task.getDescription());
-            sb.append("\n");
+            sb.append(task.toString());
         }
         return sb.toString();
+    }
+
+    public static List<Task> getTasks(File file) throws JAXBException {
+        XMLParse.Socket socket = (XMLParse.Socket) createUnmarshaller().unmarshal(file);
+        return new ArrayList<>(socket.getTasks());
     }
 }

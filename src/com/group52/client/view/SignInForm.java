@@ -1,6 +1,7 @@
 package com.group52.client.view;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class SignInForm extends MainPanel implements Listenable, Closeable {
@@ -14,6 +15,7 @@ public class SignInForm extends MainPanel implements Listenable, Closeable {
         authorizationForm.setSize(350,450);
         authorizationForm.setLocationRelativeTo(null);
         authorizationForm.setResizable(false);
+        authorizationForm.setIconImage(Toolkit.getDefaultToolkit().getImage("img/icon.png"));
 
         authorizationForm.add(loginLabel);
         JLabel passwordLabel = new JLabel("Password");

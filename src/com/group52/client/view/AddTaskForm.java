@@ -3,6 +3,7 @@ package com.group52.client.view;
 import org.jdatepicker.impl.JDatePickerImpl;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.Date;
@@ -16,10 +17,11 @@ public class AddTaskForm extends MainPanel implements Listenable {
     public JButton repeatableTaskButton = new JButton("Create task");
 
     public AddTaskForm(String taskType) {
-        taskForm = new JFrame();
+        taskForm = new JFrame("Add task");
         taskForm.setSize(350,450);
         taskForm.setLocationRelativeTo(null);
         taskForm.setResizable(false);
+        taskForm.setIconImage(Toolkit.getDefaultToolkit().getImage("img/icon.png"));
 
         startDatePicker.setBounds(30,120,140,30);
         endDatePicker.setBounds(30,170,140,30);

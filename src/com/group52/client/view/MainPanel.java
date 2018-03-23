@@ -37,20 +37,24 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
     public JButton calendarFormButton = new JButton("Show calendar");
 
     public JButton cancelButton = new JButton("Cancel");
-    public JButton exitButton = new JButton("Exit");
+    public JButton exitButton = new JButton("Logout");
 
     public JCheckBox activeBox = new JCheckBox("is Active");
+    public JComboBox comboBox = new JComboBox();
 
+    //private  SpinnerNumberModel hoursModel = new SpinnerNumberModel(8, 1, 24, 1);
+    //private  SpinnerNumberModel minutesModel = new SpinnerNumberModel(8, 1, 60, 1);
     protected JSpinner startHoursSpinner = new JSpinner();
     protected JSpinner endHoursSpinner = new JSpinner();
     protected JSpinner startMinutesSpinner = new JSpinner();
     protected JSpinner endMinutesSpinner = new JSpinner();
 
+
     public MainPanel() {
         JPanel mainPanel = new JPanel();
         this.setTitle("Task Manager");
         this.setSize(810,450);
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("img/welcome.png"));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("img/icon.png"));
         tasksField.setEditable(false);
 
         JScrollPane areaScrollPane = new JScrollPane(tasksField);
@@ -134,7 +138,7 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
 
         StringBuilder sb = new StringBuilder(String.valueOf(calendar.getModel().getYear()));
         sb.append("-");
-        sb.append(String.valueOf(calendar.getModel().getMonth()));
+        sb.append(String.valueOf(calendar.getModel().getMonth() + 1));
         sb.append("-");
         sb.append(String.valueOf(calendar.getModel().getDay()));
         sb.append(" ");

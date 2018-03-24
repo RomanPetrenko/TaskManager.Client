@@ -4,6 +4,7 @@ import com.group52.client.view.Calendar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.rmi.ServerException;
 import java.util.*;
 
@@ -72,18 +73,12 @@ public class Handler {
             notificationForm.addListener(listener);
         }
 
-        private void editTasksToComboBox (JComboBox comboBox) throws ServerException {
-            try {
-                serverDialog.sendXMLToServer(XMLParse.parseRequestToXML("view"));
-                List<XMLParse.Task> tasks = XMLParse.getTasks(getResponseFromServer());
-                comboBox.removeAllItems();
-                for (XMLParse.Task task: tasks) {
-                    comboBox.addItem(task);
-                }
-            } catch (JAXBException e) {
-                mainPanel.displayErrorMessage("Parse exception");
-                log.error(e);
-                e.printStackTrace();
+        private void editTasksToComboBox (JComboBox comboBox) throws ServerException, JAXBException {
+            serverDialog.sendXMLToServer(XMLParse.parseRequestToXML("view"));
+            List<XMLParse.Task> tasks = XMLParse.getTasks(getResponseFromServer());
+            comboBox.removeAllItems();
+            for (XMLParse.Task task: tasks) {
+                comboBox.addItem(task);
             }
         }
 
@@ -96,14 +91,14 @@ public class Handler {
                     String repeatedPassword = signUpForm.getRepeatedPassword();
 
                     if (!password.equals(repeatedPassword))
-                        mainPanel.displayMessage("Password false");
+                        throw new IOException("Passwords don't match");
                     else XMLParse.createClient(login, password, 0);
 
                     serverDialog.sendXMLToServer(XMLParse.parseRequestToXML("oneMoreUser"));
                     File response = getResponseFromServer();
                     int code = XMLParse.getCodeFromXML(response);
                     String status = XMLParse.getStatusFromXML(response);
-                    if (code == 200 || code == 201) {
+                    if(code == 200 || code == 201 || code == 202) {
                         mainPanel.displayMessage(status);
                         XMLParse.setId(XMLParse.getUserIdFromXML(response));
                         signUpForm.close();
@@ -123,7 +118,7 @@ public class Handler {
                     File response = getResponseFromServer();
                     int code = XMLParse.getCodeFromXML(response);
                     String status = XMLParse.getStatusFromXML(response);
-                    if (code == 200 || code == 201) {
+                    if(code == 200 || code == 201 || code == 202) {
                         mainPanel.displayMessage(status);
                         XMLParse.setId(XMLParse.getUserIdFromXML(response));
                         signInForm.close();
@@ -185,11 +180,14 @@ public class Handler {
 
                 if (e.getSource().equals(notificationForm.postponeTaskButton)) {
                     XMLParse.Task task = notificator.getTaskToPostpone();
+                    long time = 0;
+                    long start = 0;
+                    if (task.getInterval() != 0)  time = task.getTime() + 300000;
+                    else start = task.getStart() + 300000;
                     serverDialog.sendXMLToServer(XMLParse.parseTaskToXML("edit",
-                            task.getTitle(), "", task.getTime() + 300000,
-                            0, 0, 0, true));
+                            task, task.getTitle(), task.getDescription(), time,
+                            start, task.getEnd(), task.getInterval(), task.isActive()));
                     updateTaskList();
-                    editTaskForm.close();
                     notificationForm.close();
                 }
 
@@ -229,7 +227,7 @@ public class Handler {
                 if (e.getSource().equals(notificationForm.closeTaskButton)) notificationForm.close();
 
                 if (e.getSource().equals(mainPanel.exitButton)) {
-                    log.info("Exit");
+                    log.info("Logout");
                     serverDialog.sendXMLToServer(XMLParse.parseRequestToXML("close"));
                     serverDialog.close();
                     mainPanel.setVisible(false);
@@ -259,6 +257,9 @@ public class Handler {
             } catch (NoSuchElementException nse) {
                 mainPanel.displayErrorMessage(nse.getMessage());
                 log.error("NoSuchElementException: ", nse);
+            } catch (IOException io) {
+                mainPanel.displayErrorMessage(io.getMessage());
+                log.error("IOException: ", io);
             } catch (Exception ex) {
                 mainPanel.displayErrorMessage(ex.getMessage());
                 log.error("Exception: ", ex);

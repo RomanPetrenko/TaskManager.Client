@@ -14,23 +14,23 @@ public class Main {
         Thread notificationThread = new Thread(notificator);
         notificationThread.start();
 
-        MainPanel theView = new MainPanel();
+        MainPanel mainPanel = new MainPanel();
 
         ServerDialog serverDialog = null;
         try {
-            serverDialog = new ServerDialog(theView.getServerAddress());
+            serverDialog = new ServerDialog(mainPanel.getServerAddress());
         } catch (IOException ioe) {
-            theView.displayErrorMessage(ioe.getMessage());
+            mainPanel.displayErrorMessage(ioe.getMessage());
             log.error("InputOutput exception: ", ioe);
             ioe.printStackTrace();
         }
-        new Handler(theView, serverDialog, notificator);
+        new Handler(mainPanel, serverDialog, notificator);
 
 
         /*
         ServerDialog serverDialog = new ServerDialog();//for testing
         new Handler(theView, serverDialog, notificator); //for testing
-        theView.setVisible(true); //for testing
         */
+        //mainPanel.setVisible(true); //for testing
     }
 }

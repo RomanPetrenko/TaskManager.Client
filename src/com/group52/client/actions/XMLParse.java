@@ -256,7 +256,7 @@ public class XMLParse {
     private static Unmarshaller createUnmarshaller() throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(XMLParse.Socket.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        //unmarshaller.setProperty(javax.xml.XMLConstants.ACCESS_EX+TERNAL_DTD, Boolean.TRUE);
+        unmarshaller.setProperty(javax.xml.XMLConstants.ACCESS_EXTERNAL_DTD, Boolean.TRUE);
         return unmarshaller;
     }
 

@@ -3,6 +3,7 @@ package com.group52.client.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class SignInForm extends MainPanel implements Listenable, Closeable {
 
@@ -15,7 +16,8 @@ public class SignInForm extends MainPanel implements Listenable, Closeable {
         authorizationForm.setSize(350,450);
         authorizationForm.setLocationRelativeTo(null);
         authorizationForm.setResizable(false);
-        authorizationForm.setIconImage(Toolkit.getDefaultToolkit().getImage("img/icon.png"));
+        URL iconPath = getClass().getClassLoader().getResource("icon.png");
+        authorizationForm.setIconImage(Toolkit.getDefaultToolkit().getImage(iconPath));
 
         authorizationForm.add(loginLabel);
         JLabel passwordLabel = new JLabel("Password");

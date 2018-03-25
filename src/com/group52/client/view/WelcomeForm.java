@@ -3,6 +3,7 @@ package com.group52.client.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class WelcomeForm implements Listenable, Closeable {
     public JButton signUpButton = new JButton("sign up");
@@ -15,13 +16,17 @@ public class WelcomeForm implements Listenable, Closeable {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img/icon.png"));
+        URL iconPath = getClass().getClassLoader().getResource("icon.png");
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(iconPath));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel img;
-        img = new JLabel(new ImageIcon("img/welcome.png"));
-        img.setBounds(10, 10, 280,110);
-        frame.add(img);
+        URL imgPath = getClass().getClassLoader().getResource("welcome.png");
+        if (imgPath != null) {
+            img = new JLabel(new ImageIcon(imgPath));
+            img.setBounds(10, 10, 280, 110);
+            frame.add(img);
+        }
 
         signUpButton.setBounds(20,120,120,40);
         signInButton.setBounds(160,120,120,40);

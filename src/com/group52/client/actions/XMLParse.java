@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * class XMLParse for parse xml files
+ */
 public class XMLParse {
 
     private static Client client;
@@ -58,6 +61,9 @@ public class XMLParse {
 
     }
 
+    /**
+     * inner class Socket for construct client, action, code, status fields
+     */
     @XmlRootElement (name = "socket")
     @XmlAccessorType(XmlAccessType.FIELD)
     static class Socket {

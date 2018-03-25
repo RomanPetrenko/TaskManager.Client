@@ -5,6 +5,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -21,7 +22,8 @@ public class AddTaskForm extends MainPanel implements Listenable {
         taskForm.setSize(350,450);
         taskForm.setLocationRelativeTo(null);
         taskForm.setResizable(false);
-        taskForm.setIconImage(Toolkit.getDefaultToolkit().getImage("img/icon.png"));
+        URL iconPath = getClass().getClassLoader().getResource("icon.png");
+        taskForm.setIconImage(Toolkit.getDefaultToolkit().getImage(iconPath));
 
         startDatePicker.setBounds(30,120,140,30);
         endDatePicker.setBounds(30,170,140,30);

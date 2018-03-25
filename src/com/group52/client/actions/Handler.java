@@ -1,4 +1,5 @@
 package com.group52.client.actions;
+
 import com.group52.client.view.*;
 import com.group52.client.view.Calendar;
 import java.awt.event.ActionEvent;
@@ -7,12 +8,13 @@ import java.io.File;
 import java.io.IOException;
 import java.rmi.ServerException;
 import java.util.*;
-
 import org.apache.log4j.*;
-
 import javax.swing.*;
 import javax.xml.bind.JAXBException;
 
+/**
+ * class Handler for manage all actions
+ */
 public class Handler {
 
     private Logger log = Logger.getLogger(Handler.class);
@@ -20,6 +22,13 @@ public class Handler {
     private ServerDialog serverDialog;
     private Notificator notificator;
 
+    /**
+     * creating handler constructor
+     * @see Handler
+     * @param mainPanel is panel with tasks field and buttons
+     * @param serverDialog is socket for send and get xml files
+     * @param notificator is entity for show notification of current tasks
+     */
     public Handler(MainPanel mainPanel, ServerDialog serverDialog, Notificator notificator) {
         this.mainPanel = mainPanel;
         this.serverDialog = serverDialog;
@@ -27,15 +36,24 @@ public class Handler {
         new Handler.Listener();
     }
 
+    /**
+     * method where we get response from server
+     * @throws ServerException if server has a problem
+     * @throws JAXBException if JAXB parser has a problem
+     * @return file
+     */
     private File getResponseFromServer() throws ServerException, JAXBException {
         File file = serverDialog.getResponseFromServer();
         int code = XMLParse.getCodeFromXML(file);
         String status = XMLParse.getStatusFromXML(file);
-        if (code == 400 || code == 401 || code == 404 || code == 405 || code ==415 || code == 500)
+        if (code == 400 || code == 401 || code == 404 || code == 405 || code == 415 || code == 500)
             throw new ServerException(status);
         return file;
     }
 
+    /**
+     * method for update TaskList
+     */
     private void updateTaskList () throws ServerException, JAXBException {
             serverDialog.sendXMLToServer(XMLParse.parseRequestToXML("view"));
             File file = getResponseFromServer();
@@ -48,7 +66,9 @@ public class Handler {
                 notificator.setTaskList(XMLParse.getTasks(file));
     }
 
-
+    /**
+     * inner class Listener for manage on click actions
+     */
     public class Listener implements ActionListener {
 
         private WelcomeForm welcomeForm = new WelcomeForm();
@@ -60,6 +80,10 @@ public class Handler {
         private DeleteTaskForm deleteTaskForm = new DeleteTaskForm();
         private NotificationForm notificationForm = new NotificationForm();
 
+        /**
+         * constructor without arguments
+         * @see Listener
+         */
         public Listener() {
             Listener listener = this;
             mainPanel.addListener(listener);
@@ -73,6 +97,12 @@ public class Handler {
             notificationForm.addListener(listener);
         }
 
+        /**
+         * method for edit tasks to combo box
+         * @param comboBox is box for choose task
+         * @throws ServerException if server has a problem
+         * @throws JAXBException if JAXB parser has a problem
+         */
         private void editTasksToComboBox (JComboBox comboBox) throws ServerException, JAXBException {
             serverDialog.sendXMLToServer(XMLParse.parseRequestToXML("view"));
             List<XMLParse.Task> tasks = XMLParse.getTasks(getResponseFromServer());
@@ -82,10 +112,14 @@ public class Handler {
             }
         }
 
-        public void actionPerformed(ActionEvent e) {
+        /**
+         * method for responding to a button click
+         * @param event is action event
+         */
+        public void actionPerformed(ActionEvent event) {
             notificator.setNotificationForm(notificationForm);
             try {
-                if (e.getSource().equals(signUpForm.confirmButton)) {
+                if (event.getSource().equals(signUpForm.confirmButton)) {
                     String login = signUpForm.getLogin();
                     String password = signUpForm.getPassword();
                     String repeatedPassword = signUpForm.getRepeatedPassword();
@@ -108,7 +142,7 @@ public class Handler {
                     }
                 }
 
-                if (e.getSource().equals(signInForm.confirmButton)) {
+                if (event.getSource().equals(signInForm.confirmButton)) {
                     String login = signInForm.getLogin();
                     String password = signInForm.getPassword();
                     XMLParse.createClient(login, password, 0);
@@ -127,7 +161,7 @@ public class Handler {
                         mainPanel.open();
                     }
                 }
-                if (e.getSource().equals(unrepeatableTaskForm.unrepeatableTaskButton)) {
+                if (event.getSource().equals(unrepeatableTaskForm.unrepeatableTaskButton)) {
                     String title = unrepeatableTaskForm.getTitle();
                     String description = unrepeatableTaskForm.getDescription();
                     long time = unrepeatableTaskForm.getStartTime();
@@ -138,7 +172,7 @@ public class Handler {
                     unrepeatableTaskForm.close();
                 }
 
-                if (e.getSource().equals(repeatableTaskForm.repeatableTaskButton)) {
+                if (event.getSource().equals(repeatableTaskForm.repeatableTaskButton)) {
                     String title = repeatableTaskForm.getTitle();
                     String description = repeatableTaskForm.getDescription();
                     long start = repeatableTaskForm.getStartTime();
@@ -151,7 +185,7 @@ public class Handler {
                     repeatableTaskForm.close();
                 }
 
-                if (e.getSource().equals(editTaskForm.editTaskButton)) {
+                if (event.getSource().equals(editTaskForm.editTaskButton)) {
                     XMLParse.Task oldTask = (XMLParse.Task) editTaskForm.comboBox.getModel().getSelectedItem();
                     String title = editTaskForm.getTitle();
                     String description = editTaskForm.getDescription();
@@ -171,14 +205,14 @@ public class Handler {
                     editTaskForm.close();
                 }
 
-                if (e.getSource().equals(deleteTaskForm.deleteTaskButton)) {
+                if (event.getSource().equals(deleteTaskForm.deleteTaskButton)) {
                     XMLParse.Task task = (XMLParse.Task) deleteTaskForm.comboBox.getModel().getSelectedItem();
                     serverDialog.sendXMLToServer(XMLParse.parseTaskToXML("delete", task));
                     updateTaskList();
                     deleteTaskForm.close();
                 }
 
-                if (e.getSource().equals(notificationForm.postponeTaskButton)) {
+                if (event.getSource().equals(notificationForm.postponeTaskButton)) {
                     XMLParse.Task task = notificator.getTaskToPostpone();
                     long time = 0;
                     long start = 0;
@@ -191,42 +225,42 @@ public class Handler {
                     notificationForm.close();
                 }
 
-                if (e.getSource().equals(mainPanel.calendarFormButton)) {
+                if (event.getSource().equals(mainPanel.calendarFormButton)) {
                     new Calendar(true);
                 }
-                if (e.getSource().equals(welcomeForm.signUpButton)) signUpForm.open();
-                if (e.getSource().equals(signUpForm.cancelButton)) signUpForm.close();
+                if (event.getSource().equals(welcomeForm.signUpButton)) signUpForm.open();
+                if (event.getSource().equals(signUpForm.cancelButton)) signUpForm.close();
 
-                if (e.getSource().equals(welcomeForm.signInButton)) signInForm.open();
-                if (e.getSource().equals(signInForm.cancelButton)) signInForm.close();
+                if (event.getSource().equals(welcomeForm.signInButton)) signInForm.open();
+                if (event.getSource().equals(signInForm.cancelButton)) signInForm.close();
 
-                if (e.getSource().equals(mainPanel.unrepeatableTaskFormButton)) unrepeatableTaskForm.open();
-                if (e.getSource().equals(unrepeatableTaskForm.cancelButton)) unrepeatableTaskForm.close();
+                if (event.getSource().equals(mainPanel.unrepeatableTaskFormButton)) unrepeatableTaskForm.open();
+                if (event.getSource().equals(unrepeatableTaskForm.cancelButton)) unrepeatableTaskForm.close();
 
-                if (e.getSource().equals(mainPanel.repeatableTaskFormButton)) repeatableTaskForm.open();
-                if (e.getSource().equals(repeatableTaskForm.cancelButton)) repeatableTaskForm.close();
+                if (event.getSource().equals(mainPanel.repeatableTaskFormButton)) repeatableTaskForm.open();
+                if (event.getSource().equals(repeatableTaskForm.cancelButton)) repeatableTaskForm.close();
 
-                if (e.getSource().equals(mainPanel.editTaskFormButton)) {
+                if (event.getSource().equals(mainPanel.editTaskFormButton)) {
                     editTasksToComboBox(editTaskForm.comboBox);
                     editTaskForm.open();
                 }
-                if (e.getSource().equals(editTaskForm.cancelButton)) editTaskForm.close();
+                if (event.getSource().equals(editTaskForm.cancelButton)) editTaskForm.close();
 
-                if (e.getSource().equals(editTaskForm.comboBox)) {
+                if (event.getSource().equals(editTaskForm.comboBox)) {
                     XMLParse.Task task = (XMLParse.Task) editTaskForm.comboBox.getModel().getSelectedItem();
                     if (task.getInterval() == 0) editTaskForm.removeRepeatableFields();
                     else editTaskForm.addRepeatableFields();
                 }
 
-                if (e.getSource().equals(mainPanel.deleteTaskFormButton)) {
+                if (event.getSource().equals(mainPanel.deleteTaskFormButton)) {
                     editTasksToComboBox(deleteTaskForm.comboBox);
                     deleteTaskForm.open();
                 }
-                if (e.getSource().equals(deleteTaskForm.cancelButton)) deleteTaskForm.close();
+                if (event.getSource().equals(deleteTaskForm.cancelButton)) deleteTaskForm.close();
 
-                if (e.getSource().equals(notificationForm.closeTaskButton)) notificationForm.close();
+                if (event.getSource().equals(notificationForm.closeTaskButton)) notificationForm.close();
 
-                if (e.getSource().equals(mainPanel.exitButton)) {
+                if (event.getSource().equals(mainPanel.exitButton)) {
                     log.info("Logout");
                     serverDialog.sendXMLToServer(XMLParse.parseRequestToXML("close"));
                     serverDialog.close();
@@ -251,7 +285,8 @@ public class Handler {
                 mainPanel.displayErrorMessage("NullPointerException");
                 log.error("NullPointerException: ", npe);
                 npe.printStackTrace();
-            } catch (IndexOutOfBoundsException ioe) {
+            }
+            catch (IndexOutOfBoundsException ioe) {
                 mainPanel.displayErrorMessage("IndexOutOfBoundsException");
                 log.error("IndexOutOfBoundsException: ", ioe);
             } catch (NoSuchElementException nse) {

@@ -3,6 +3,7 @@ package com.group52.client.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class NotificationForm implements Closeable, Listenable {
 
@@ -16,7 +17,8 @@ public class NotificationForm implements Closeable, Listenable {
         notificationForm.setSize(460,190);
         notificationForm.setLocationRelativeTo(null);
         notificationForm.setResizable(false);
-        notificationForm.setIconImage(Toolkit.getDefaultToolkit().getImage("img/alarm.png"));
+        URL iconPath = getClass().getClassLoader().getResource("alarm.png");
+        notificationForm.setIconImage(Toolkit.getDefaultToolkit().getImage(iconPath));
         notificationForm.setLayout(null);
 
         tasksField.setEditable(false);

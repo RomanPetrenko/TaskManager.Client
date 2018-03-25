@@ -3,6 +3,7 @@ package com.group52.client.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class DeleteTaskForm extends MainPanel implements Listenable {
 
@@ -14,7 +15,8 @@ public class DeleteTaskForm extends MainPanel implements Listenable {
         taskForm.setSize(350,450);
         taskForm.setLocationRelativeTo(null);
         taskForm.setResizable(false);
-        taskForm.setIconImage(Toolkit.getDefaultToolkit().getImage("img/icon.png"));
+        URL iconPath = getClass().getClassLoader().getResource("icon.png");
+        taskForm.setIconImage(Toolkit.getDefaultToolkit().getImage(iconPath));
 
         JScrollPane scrollPane = new JScrollPane(comboBox);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -22,9 +24,12 @@ public class DeleteTaskForm extends MainPanel implements Listenable {
         taskForm.getContentPane().add(scrollPane);
 
         JLabel img;
-        img = new JLabel(new ImageIcon("img/delete.png"));
-        img.setBounds(30, 15, 300,120);
-        taskForm.add(img);
+        URL imgPath = getClass().getClassLoader().getResource("delete.png");
+        if (imgPath != null) {
+            img = new JLabel(new ImageIcon(imgPath));
+            img.setBounds(30, 15, 300,120);
+            taskForm.add(img);
+        }
 
         deleteTaskButton.setBounds(30,300,280,40);
         taskForm.add(deleteTaskButton);

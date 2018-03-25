@@ -4,6 +4,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,7 +55,8 @@ public class MainPanel extends JFrame implements Listenable, Closeable {
         JPanel mainPanel = new JPanel();
         this.setTitle("Task Manager");
         this.setSize(810,450);
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("img/icon.png"));
+        URL iconPath = getClass().getClassLoader().getResource("icon.png");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(iconPath));
         tasksField.setEditable(false);
 
         JScrollPane areaScrollPane = new JScrollPane(tasksField);
